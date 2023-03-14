@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
         render json: students
     end
     def highest_grade
-        student = Student.where(grade: Student.maximum(:grade)).pluck(:first_name, :last_name, :grade).first
-        render json: {first_name: student[0], last_name: student[1], grade: student[2]}
+        student = Student.where(grade: Student.maximum(:grade)).first
+        render json: student.as_json(only: [:first_name, :last_name, :grade])
     end
 end
